@@ -10,10 +10,10 @@ TIMECODE FORMAT:	30 Frame
 
 T R A C K  L I S T I N G
 TRACK NAME:	durations (Stereo)
-COMMENTS:	
+COMMENTS:
 USER DELAY:	0 Samples
-STATE: 
-CHANNEL 	EVENT   	CLIP NAME                     	START TIME    	END TIME      	DURATION      	TIMESTAMP         	STATE
+STATE:
+CHANNEL 	EVENT   	CLIP_NAME                     	START_TIME    	END_TIME      	DURATION      	TIMESTAMP         	STATE
 1       	1       	6+6+6.L                       	     22:49.814	     23:01.404	      0:11.589	          0:00.877	Unmuted
 1       	2       	6+6+6.L                       	     23:01.404	     23:12.152	      0:10.748	          0:12.466	Unmuted
 1       	3       	6+6+8.L                       	     23:12.152	     23:23.032	      0:10.879	          0:23.214	Unmuted

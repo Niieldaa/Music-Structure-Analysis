@@ -2,12 +2,9 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
 
 import libfmp.b
-import libfmp.c2
 import libfmp.c3
-import libfmp.c4
 import libfmp.c6
 
 # Generate normalized feature sequence
@@ -31,7 +28,7 @@ fig, ax = plt.subplots(2, 2, gridspec_kw={'width_ratios': [1, 0.05], 'height_rat
 libfmp.b.plot_matrix(X, Fs=1, ax=[ax[0,0], ax[0,1]], cmap=cmap,
             xlabel='Time (frames)', ylabel='', title='Feature sequence')
 libfmp.b.plot_matrix(S, Fs=1, ax=[ax[1,0], ax[1,1]], cmap=cmap,
-            title='SSM', xlabel='Time (frames)', ylabel='Time (frames)', colorbar=True);
+            title='SSM', xlabel='Time (frames)', ylabel='Time (frames)', colorbar=True)
 plt.tight_layout()
 
 plt.tight_layout()
