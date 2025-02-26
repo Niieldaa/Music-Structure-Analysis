@@ -1,23 +1,21 @@
 import csv
 
 def parse_new_data(data):
-    # Prepare a list to hold parsed rows
     parsed_data = []
 
-    # Use DictReader to parse the data (tab-delimited)
+    # Use DictReader to parse the data and they are separated by tab
     reader = csv.DictReader(data.splitlines(), delimiter='\t')
 
     # Print the column names to check for issues
     print(f"Column names: {reader.fieldnames}")
 
-    # Ensure to clean up any extra spaces around column names
+    # Ensure to clean up any extra spaces around column names - because they are set up very weird.
     reader.fieldnames = [field.strip() for field in reader.fieldnames]
 
 
     for row in reader:
         print(f"Row: {row}")
         # Extract only the fields we care about
-
         try:
             parsed_data.append({
                 "CLIP_NAME": str(row["CLIP_NAME"]).strip(),  # Keep clip name as a string
@@ -57,8 +55,8 @@ def export_to_csv(parsed_data, output_file_path):
 file_path = "Files/Export.txt"  # Adjust this path based on your file location
 output_file_path = "Files/Parsed data/parsed_data.csv"  # Adjust the output file path
 
-# Read the file content and parse the data, skipping the first few lines
-file_data = read_file(file_path, skip_lines=15)  # Adjust `skip_lines` as necessary
+# Read the file content and parse the data, skipping the first few lines - dont need them
+file_data = read_file(file_path, skip_lines=15)
 
 parsed_result = parse_new_data(file_data)
 
@@ -66,7 +64,7 @@ parsed_result = parse_new_data(file_data)
 export_to_csv(parsed_result, output_file_path)
 
 # Print the parsed result to the console
-print("CLIP NAME\tDURATION \tTIMESTAMP")  # Column headers
+print("CLIP NAME\tDURATION \tTIMESTAMP")
 for item in parsed_result:
     print(f"{item['CLIP_NAME']}\t{item['DURATION']:.3f}\t{item['TIMESTAMP']:.3f}")
 
