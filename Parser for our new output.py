@@ -40,7 +40,7 @@ file_data = read_file(file_path)
 parsed_result = parse_new_data(file_data)
 
 # Output file path where the parsed data will be saved
-output_file_path = "Files/parsed_data.csv"  # Replace with desired output file path
+output_file_path = "Files/Parsed data/parsed_data_new.csv"  # Replace with desired output file path
 # Export the parsed result to a new CSV file
 export_to_csv(parsed_result, output_file_path)
 
