@@ -12,7 +12,7 @@ def parse_new_data(data):
             "FRAME": int(row['FRAME']),
             "VALUE": float(row['VALUE']),
             "DURATION": float(row['DURATION']),
-            "LABEL": row["LABEL"]
+            "LABEL": ord(row["LABEL"].upper()) - ord('A') + 1
         })
     return parsed_data
 
@@ -50,4 +50,5 @@ for item in parsed_result:
     print(f"{item['FRAME']}\t{item['VALUE']}\t{item['DURATION']}\t{item['LABEL']}")
 
 print(f"parsed_result is exported to {output_file_path}")
+print(f"Jeg gider ikke at GitHub skal drille sådan her")
 
