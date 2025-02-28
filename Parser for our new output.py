@@ -11,8 +11,8 @@ def parse_new_data(data):
 
     for row in reader:
         parsed_data.append({
-            "FRAME": int(row['FRAME']),
-            "VALUE": float(row['VALUE']),
+            "TIME": float(row['TIME']),
+            "VALUE": int(row['VALUE']),
             "DURATION": float(row['DURATION']),
             "LABEL": ord(row["LABEL"].upper()) - ord('A') + 1
         })
@@ -27,7 +27,7 @@ def read_file(file_path):
 # Function to export data to a new CSV file
 def export_to_csv(parsed_data, output_file_path):
     with open(output_file_path, 'w', newline='') as file:
-        fieldnames = ["FRAME", "VALUE", "DURATION", "LABEL"]
+        fieldnames = ["TIME", "VALUE", "DURATION", "LABEL"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
 
         # Write the header row
