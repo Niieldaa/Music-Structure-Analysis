@@ -44,11 +44,14 @@ output_file_path = "Files/Parsed data/parsed_data_new.csv"  # Replace with desir
 # Export the parsed result to a new CSV file
 export_to_csv(parsed_result, output_file_path)
 
-# Print the parsed result
-print("FRAME\tVALUE\tDURATION\tLABEL")  # Column headers
-for item in parsed_result:
-    print(f"{item['FRAME']}\t{item['VALUE']}\t{item['DURATION']}\t{item['LABEL']}")
+
+# Print parsed result in tabular format
+from tabulate import tabulate
+headers = ["FRAME", "VALUE", "DURATION", "LABEL"]
+table = [list(item.values()) for item in parsed_result]
+
+print(tabulate(table, headers=headers, tablefmt="grid"))  # Alternative: "plain", "pipe", "fancy_grid", etc.
 
 print(f"parsed_result is exported to {output_file_path}")
-print(f"Jeg gider ikke at GitHub skal drille sådan her")
+print("Jeg gider ikke at GitHub skal drille sådan her")
 
