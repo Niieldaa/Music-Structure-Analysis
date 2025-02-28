@@ -1,5 +1,7 @@
 # We need to parse the data to something useful - and make them split the songs :)
 import csv
+import os
+
 
 def parse_new_data(data):
     # Prepare a list to hold parsed rows
@@ -34,21 +36,34 @@ def export_to_csv(parsed_data, output_file_path):
         # Write the data rows
         writer.writerows(parsed_data)
 
-file_path = "Files/eh.csv"
+def process_files_in_folder(folder_path, output_folder):
+    all_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
 
-file_data = read_file(file_path)
-parsed_result = parse_new_data(file_data)
+    all_parsed_data = []
 
-# Output file path where the parsed data will be saved
-output_file_path = "Files/Parsed data/parsed_data_new.csv"  # Replace with desired output file path
-# Export the parsed result to a new CSV file
-export_to_csv(parsed_result, output_file_path)
+    for file_name in all_files:
+        file_path = os.path.join(folder_path, file_name)
 
-# Print the parsed result
-print("FRAME\tVALUE\tDURATION\tLABEL")  # Column headers
-for item in parsed_result:
-    print(f"{item['FRAME']}\t{item['VALUE']}\t{item['DURATION']}\t{item['LABEL']}")
+        file_data = read_file(file_path)
+        parsed_result = parse_new_data(file_data)
 
-print(f"parsed_result is exported to {output_file_path}")
-print(f"Jeg gider ikke at GitHub skal drille sådan her")
+        all_parsed_data.extend(parsed_result)
+
+        output_file_name = f"parsed_{file_name}"
+        output_file_path = os.path.join(output_folder, output_file_name)
+
+        export_to_csv(parsed_result, output_file_path)
+
+        print(f"Processed and exported parsed data for {file_name} to {output_file_path}")
+
+    return all_parsed_data
+
+
+# located files
+file_folder = 'Files/Vitallic'
+output_folder = 'Files/Parsed data'
+
+process_files_in_folder(file_folder, output_folder)
+
+print(f"All parsed data is exported to {output_folder}")
 
