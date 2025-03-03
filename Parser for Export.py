@@ -49,11 +49,12 @@ def export_to_csv(parsed_data, output_file_path):
 
         # Write the data rows
         writer.writerows(parsed_data)
+        
 
 
 # Define the input and output file paths
 file_path = "Files/Export.txt"  # Adjust this path based on your file location
-output_file_path = "Files/Parsed data/parsed_data.csv"  # Adjust the output file path
+output_file_path = "Files/Export Folder/parsed_data.csv"  # Adjust the output file path
 
 # Read the file content and parse the data, skipping the first few lines - dont need them
 file_data = read_file(file_path, skip_lines=15)
