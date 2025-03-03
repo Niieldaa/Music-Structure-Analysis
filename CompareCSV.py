@@ -5,32 +5,32 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Define folder paths relative to the script
-folder1 = os.path.join(script_dir, "Files", "Vitallic")
+folder1 = os.path.join(script_dir, "Files", "Export Folder")
 folder2 = os.path.join(script_dir, "Files", "Parsed data")
 
-# Function to compare two CSV files
+# Function that compares two CSV files
 def compare(file1, file2):
     differences = []
 
-    # Open both CSV files in read mode
+    # Open both CSV files in read mode using csv
     with open(file1, 'r', newline='') as csv_file1, open(file2, 'r', newline='') as csv_file2:
         reader1 = csv.reader(csv_file1)
         reader2 = csv.reader(csv_file2)
 
-        # Iterate over rows in both files simultaneously
+        # Iterate over rows in both files at the same time
         for row1, row2 in zip(reader1, reader2):
             if row1 != row2:
                 differences.append((row1, row2))
 
     return differences
 
-# Loop through files 1 to 72
-for i in range(1, 73):
-    file1 = os.path.join(folder1, f"VitalicSegmented{i}.csv")
+# Looping through files 1 to 72
+for i in range(1, 70):
+    file1 = os.path.join(folder1, f"parsed_data_{i}.csv")
     file2 = os.path.join(folder2, f"parsed_VitalicSegmented{i}.csv")
 
     if os.path.exists(file1) and os.path.exists(file2):  # Ensure both files exist
-        print(f"Comparing VitalicSegmented{i}.csv with parsed_VitalicSegmented{i}.csv...")
+        print(f"Comparing parsed_data{i}.csv with parsed_VitalicSegmented{i}.csv...")
         differences = compare(file1, file2)
 
         if differences:
