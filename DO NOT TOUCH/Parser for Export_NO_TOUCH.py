@@ -101,7 +101,7 @@ def export_to_csv(parsed_data, output_file_path):
 
 
 # Define the input and output file paths
-file_path = "Files/Export.txt"  # Adjust this path based on your file location
+file_path = "Export.txt"  # Adjust this path based on your file location
 output_file_path = "Files/Export Folder/parsed_data"  # Adjust the output file path
 
 # Read the file content and parse the data, skipping the first few lines - don't need them
