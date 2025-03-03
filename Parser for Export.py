@@ -6,21 +6,45 @@ def parse_new_data(data):
     # Use DictReader to parse the data and they are separated by tab
     reader = csv.DictReader(data.splitlines(), delimiter='\t')
 
-    # Print the column names to check for issues
-    print(f"Column names: {reader.fieldnames}")
-
-    # Ensure to clean up any extra spaces around column names - because they are set up very weird.
+    # Ensure to clean up any extra spaces around column names
     reader.fieldnames = [field.strip() for field in reader.fieldnames]
 
+    def time_to_seconds(time_string):
+        """Converts a time string like '0:00.877' or '10.877' into total seconds."""
+        if time_string is None or time_string.strip() == "":  # Handle None or empty strings
+            return 0  # Default to 0 seconds if invalid time string
+
+        time_string = time_string.strip()  # Remove extra spaces
+
+        # Case 1: Time format "minutes:seconds.milliseconds"
+        if ':' in time_string:
+            try:
+                minutes, seconds = time_string.split(":")  # Split into minutes and seconds
+                seconds, milliseconds = seconds.split(".")  # Split seconds and milliseconds
+                total_seconds = int(minutes) * 60 + int(seconds) + int(milliseconds) / 1000
+            except ValueError:  # Handle invalid format
+                return 0  # Return 0 if format is incorrect or split fails
+
+        # Case 2: Time format "seconds.milliseconds" (no minutes)
+        else:
+            try:
+                seconds, milliseconds = time_string.split(".")  # Split seconds and milliseconds
+                total_seconds = int(seconds) + int(milliseconds) / 1000
+            except ValueError:  # Handle invalid format
+                return 0  # Return 0 if format is incorrect or split fails
+
+        return total_seconds
 
     for row in reader:
-        print(f"Row: {row}")
-        # Extract only the fields we care about
         try:
+            timestamp_string = row["TIMESTAMP"]  # Get the timestamp from the row
+            timestamp_seconds = time_to_seconds(timestamp_string)  # Convert to total seconds
+
+            # Extract the fields we care about
             parsed_data.append({
-                "CLIP_NAME": str(row["CLIP_NAME"]).strip(),  # Keep clip name as a string
-                "DURATION": str(row["DURATION"]).strip(),  # Convert duration to seconds
-                "TIMESTAMP": str(row["TIMESTAMP"]).strip(),  # Convert timestamp to seconds
+                "CLIP_NAME": str(row["CLIP_NAME"]).strip(),
+                "DURATION": str(row["DURATION"]).strip(),
+                "TIMESTAMP": timestamp_seconds  # Total seconds value
             })
         except KeyError as e:
             print(f"Missing key: {e} in row: {row}")
@@ -48,12 +72,16 @@ def export_to_csv(parsed_data, output_file_path):
             writer.writeheader()
             writer.writerows(data)
 
-
     for row in parsed_data:
         timestamp = row["TIMESTAMP"]
 
-        # set the timestamp we want to split into
-        if timestamp == "0:00.000":
+        # Ensure timestamp is not None
+        if timestamp is None:
+            timestamp = 0  # Default to 0 if None
+
+        # Check if the timestamp is within the 0-5 seconds range
+        if 0 <= timestamp <= 5:
+            # If current data has entries, write them to a file and reset
             if current_data:
                 write_data_to_file(current_data, file_count)
                 file_count += 1
@@ -69,9 +97,9 @@ def export_to_csv(parsed_data, output_file_path):
 
 # Define the input and output file paths
 file_path = "Files/Export.txt"  # Adjust this path based on your file location
-output_file_path = "Files/Export Folder/parsed_data.csv"  # Adjust the output file path
+output_file_path = "Files/Export Folder/parsed_data"  # Adjust the output file path
 
-# Read the file content and parse the data, skipping the first few lines - dont need them
+# Read the file content and parse the data, skipping the first few lines - don't need them
 file_data = read_file(file_path, skip_lines=15)
 
 parsed_result = parse_new_data(file_data)
@@ -81,6 +109,7 @@ export_to_csv(parsed_result, output_file_path)
 
 # Print the parsed result to the console
 print("CLIP NAME\tDURATION \tTIMESTAMP")
-
+for row in parsed_result:
+    print(f"{row['CLIP_NAME']}\t{row['DURATION']}\t{row['TIMESTAMP']}")
 
 print(f"parsed_result is exported to {output_file_path}")
