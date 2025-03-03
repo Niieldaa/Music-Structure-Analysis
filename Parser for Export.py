@@ -36,24 +36,40 @@ def read_file(file_path, skip_lines=10):
             next(file)  # Skip each line
         return file.read()
 
-
-
-# Function to export data to a new CSV file
 def export_to_csv(parsed_data, output_file_path):
-    with open(output_file_path, 'w', newline='') as file:
-        fieldnames = ["CLIP_NAME", "DURATION", "TIMESTAMP"]
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
+    # Initialize variables
+    file_count = 1
+    current_data = []
 
-        # Write the header row
-        writer.writeheader()
+    def write_data_to_file(data, file_index):
+        with open(f'{output_file_path}_{file_index}.csv', 'w', newline='') as file:
+            fieldnames = ["CLIP_NAME", "DURATION", "TIMESTAMP"]
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(data)
 
-        # Write the data rows
-        writer.writerows(parsed_data)
+
+    for row in parsed_data:
+        timestamp = row["TIMESTAMP"]
+
+        # set the timestamp we want to split into
+        if timestamp == "0:00.000":
+            if current_data:
+                write_data_to_file(current_data, file_count)
+                file_count += 1
+                current_data = []  # Reset the current data
+
+        # Add the row to the current data
+        current_data.append(row)
+
+    # After loop ends, write any remaining data to a file
+    if current_data:
+        write_data_to_file(current_data, file_count)
 
 
 # Define the input and output file paths
 file_path = "Files/Export.txt"  # Adjust this path based on your file location
-output_file_path = "Files/Parsed data/parsed_data.csv"  # Adjust the output file path
+output_file_path = "Files/Export Folder/parsed_data.csv"  # Adjust the output file path
 
 # Read the file content and parse the data, skipping the first few lines - dont need them
 file_data = read_file(file_path, skip_lines=15)
@@ -65,7 +81,6 @@ export_to_csv(parsed_result, output_file_path)
 
 # Print the parsed result to the console
 print("CLIP NAME\tDURATION \tTIMESTAMP")
-for item in parsed_result:
-    print(f"{item['CLIP_NAME']}\t{item['DURATION']:.3f}\t{item['TIMESTAMP']:.3f}")
+
 
 print(f"parsed_result is exported to {output_file_path}")
