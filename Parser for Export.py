@@ -85,7 +85,7 @@ def export_to_csv(parsed_data, output_file_path):
             timestamp = 0  # Default to 0 if None
 
         # Check if the timestamp is within the 0-5 seconds range
-        if 0 <= timestamp <= 2:
+        if 0 <= timestamp <= 3.9:
             # If current data has entries, write them to a file and reset
             if current_data:
                 write_data_to_file(current_data, file_count)
