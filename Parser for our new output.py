@@ -60,8 +60,8 @@ def process_files_in_folder(folder_path, output_folder):
 
 
 # located files
-file_folder = 'Files/Vitallic'
-output_folder = 'Files/Parsed data'
+file_folder = 'Files/Vitallic/RightSegmented'
+output_folder = 'Files/Parsed data/Right'
 
 process_files_in_folder(file_folder, output_folder)
 
