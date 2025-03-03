@@ -53,12 +53,17 @@ def parse_new_data(data):
 
 
 # Function to read the .txt file contents, skipping the first N lines
-def read_file(file_path, skip_lines=10):
+def read_file(file_path, skip_lines_top=10, skip_lines_bottom=0):
     with open(file_path, 'r') as file:
-        # Skip the first `skip_lines` lines and read the rest of the file
-        for _ in range(skip_lines):
-            next(file)  # Skip each line
-        return file.read()
+        lines = file.readlines()  # Read all lines at once
+
+        # Skip the first `skip_lines_top` lines
+        lines_to_read = lines[skip_lines_top:]
+
+        # Skip the last `skip_lines_bottom` lines
+        lines_to_read = lines_to_read[:-skip_lines_bottom] if skip_lines_bottom > 0 else lines_to_read
+
+        return ''.join(lines_to_read)
 
 def export_to_csv(parsed_data, output_file_path):
     # Initialize variables
@@ -80,7 +85,7 @@ def export_to_csv(parsed_data, output_file_path):
             timestamp = 0  # Default to 0 if None
 
         # Check if the timestamp is within the 0-5 seconds range
-        if 0 <= timestamp <= 5:
+        if 0 <= timestamp <= 2:
             # If current data has entries, write them to a file and reset
             if current_data:
                 write_data_to_file(current_data, file_count)
@@ -100,7 +105,7 @@ file_path = "Files/Export.txt"  # Adjust this path based on your file location
 output_file_path = "Files/Export Folder/parsed_data"  # Adjust the output file path
 
 # Read the file content and parse the data, skipping the first few lines - don't need them
-file_data = read_file(file_path, skip_lines=15)
+file_data = read_file(file_path, skip_lines_top=15, skip_lines_bottom=821)
 
 parsed_result = parse_new_data(file_data)
 
