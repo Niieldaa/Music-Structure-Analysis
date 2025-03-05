@@ -11,7 +11,7 @@ folder1 = os.path.join(script_dir, "Files", "Export Folder", "L2")  # CSV1 folde
 folder2 = os.path.join(script_dir, "Files", "Parsed data", "Left")  # CSV2 folder
 
 # Output CSV file to save differences
-output_csv = os.path.join(script_dir, "differences_log R2 and Right.csv")
+output_csv = os.path.join(script_dir, "differences_log L2 and Left.csv")
 
 
 # Function to compare timestamps and durations and compute F1 score
