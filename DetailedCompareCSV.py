@@ -1,4 +1,3 @@
-
 import csv
 import os
 
@@ -6,9 +5,11 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Define folder paths
-folder1 = os.path.join(script_dir, "Files", "Export Folder", "L2")  # CSV1 folder
-folder2 = os.path.join(script_dir, "Files", "Parsed data", "Left")  # CSV2 folder
+folder1 = os.path.join(script_dir, "Files", "Export Folder", "R2")  # CSV1 folder
+folder2 = os.path.join(script_dir, "Files", "Parsed data", "Right")  # CSV2 folder
 
+# Output CSV file to save differences
+output_csv = os.path.join(script_dir, "differences_log R2 and Right.csv")
 
 # Function to compare timestamps and durations
 def compare(file1, file2, min_tolerance=0.5, max_tolerance=3.0):
@@ -31,31 +32,42 @@ def compare(file1, file2, min_tolerance=0.5, max_tolerance=3.0):
                     time_diff = abs(time1 - time2)
                     duration_diff = abs(duration1 - duration2)
 
-                    # Check if differences are within the allowed range (0.5s to 3s)
-                    if not (
-                            min_tolerance <= time_diff <= max_tolerance and min_tolerance <= duration_diff <= max_tolerance):
-                        differences.append(
-                            (row1, row2, f"Time diff: {time_diff:.3f}s, Duration diff: {duration_diff:.3f}s"))
+                    # Check if differences are outside the allowed range (0.5s to 3s)
+                    if not (min_tolerance <= time_diff <= max_tolerance and min_tolerance <= duration_diff <= max_tolerance):
+                        differences.append([
+                            os.path.basename(file1), os.path.basename(file2),
+                            time1, duration1, time2, duration2,
+                            f"{time_diff:.3f}s", f"{duration_diff:.3f}s"
+                        ])
                 except ValueError:
                     print(f"Skipping row due to invalid number format: {row1} or {row2}")
 
     return differences
 
 
-# Loop through files 1 to 72
-for i in range(1, 73):
-    file1 = os.path.join(folder1, f"parsed_data_{i}.csv")
-    file2 = os.path.join(folder2, f"parsed_VitalicSegmented{i}L.csv")
+# Open output CSV file for writing
+with open(output_csv, mode="w", newline="") as csv_output:
+    writer = csv.writer(csv_output)
+    writer.writerow([
+        "File1", "File2", "Timestamp1", "Duration1",
+        "Timestamp2", "Duration2", "Time Difference", "Duration Difference"
+    ])
 
-    if os.path.exists(file1) and os.path.exists(file2):
-        print(f"Comparing parsed_data_{i}.csv with parsed_VitalicSegmented{i}L.csv...")
-        differences = compare(file1, file2)
+    # Loop through files 1 to 72
+    for i in range(1, 73):
+        file1 = os.path.join(folder1, f"parsed_data_{i}.csv")
+        file2 = os.path.join(folder2, f"parsed_VitalicSegmented{i}L.csv")
 
-        if differences:
-            print(f"Differences found in {file1} and {file2}:")
-            for row1, row2, diff in differences:
-                print(f" - {diff}: {row1} vs {row2}")
+        if os.path.exists(file1) and os.path.exists(file2):
+            print(f"Comparing parsed_data_{i}.csv with parsed_VitalicSegmented{i}L.csv...")
+            differences = compare(file1, file2)
+
+            if differences:
+                writer.writerows(differences)
+                print(f"Differences found in {file1} and {file2}, saved to CSV.")
+            else:
+                print(f"No significant differences found in {file1} and {file2}.")
         else:
-            print(f"No significant differences found in {file1} and {file2}.")
-    else:
-        print(f"Skipping comparison: One of the files missing -> {file1} or {file2}")
+            print(f"Skipping comparison: One of the files is missing -> {file1} or {file2}")
+
+print(f"\nComparison results saved to {output_csv}")
