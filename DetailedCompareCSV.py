@@ -1,5 +1,7 @@
 import csv
 import os
+from sklearn.metrics import confusion_matrix, classification_report
+import numpy as np
 
 # Get the script's directory (relative to project root)
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -83,13 +85,17 @@ with open(output_csv, mode="w", newline="", encoding="utf-8") as csv_output:
         file2 = os.path.join(folder2, f"parsed_VitalicSegmented{i}L.csv")
 
         if os.path.exists(file1) and os.path.exists(file2):
-            print(f"Comparing parsed_data_{i}.csv with parsed_VitalicSegmented{i}L.csv...")
+            print(f"\nComparing parsed_data_{i}.csv with parsed_VitalicSegmented{i}L.csv...")
             TP, FP, FN = compare(file1, file2)
 
             # Compute precision, recall, and F1 score
             precision = TP / (TP + FP) if (TP + FP) > 0 else 0
             recall = TP / (TP + FN) if (TP + FN) > 0 else 0
             f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+
+            # Print results immediately after each file
+            print(
+                f"→ File {i}: TP={TP}, FP={FP}, FN={FN}, Precision={precision:.4f}, Recall={recall:.4f}, F1 Score={f1_score:.4f}")
 
             # Write to CSV
             writer.writerow([file1, file2, TP, FP, FN, f"{precision:.4f}", f"{recall:.4f}", f"{f1_score:.4f}"])
