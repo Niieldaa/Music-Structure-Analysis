@@ -8,8 +8,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 folder1 = os.path.join(script_dir, "Files", "Export Folder", "L2")  # CSV1 folder
 folder2 = os.path.join(script_dir, "Files", "Parsed data", "Left")  # CSV2 folder
 
-# Function to compare timestamps and durations
-def compare(file1, file2, min_tolerance=0.01, max_tolerance=3.0):
+# Function for Hit Rate to compare timestamps and durations
+def compare(file1, file2, min_tolerance=0.0, max_tolerance=3.0):
     matches = []
 
     with open(file1, 'r', newline='') as csv_file1, open(file2, 'r', newline='') as csv_file2:
@@ -19,11 +19,11 @@ def compare(file1, file2, min_tolerance=0.01, max_tolerance=3.0):
         for row1, row2 in zip(reader1, reader2):
             if len(row1) >= 3 and len(row2) >= 3:  # Ensure both rows have enough columns
                 try:
-                    time1 = float(row1[2])  # Extract timestamp from CSV1
-                    duration1 = float(row1[1])  # Extract duration from CSV1
+                    time1 = float(row1[2])  # Extract timestamp from file1
+                    duration1 = float(row1[1])  # Extract duration from file1
 
-                    time2 = float(row2[0])  # Extract timestamp from CSV2
-                    duration2 = float(row2[2])  # Extract duration from CSV2
+                    time2 = float(row2[0])  # Extract timestamp from file2
+                    duration2 = float(row2[2])  # Extract duration from file2
 
                     # Calculate absolute differences
                     time_diff = abs(time1 - time2)
@@ -53,6 +53,6 @@ for i in range(1, 73):
             for row1, row2, match in matches:
                 print(f" - {match}: {row1} vs {row2}")
         else:
-            print(f"No matching segments within 0.5s - 3s found in {file1} and {file2}.")
+            print(f"No matching segments within 0.0s - 3s found in {file1} and {file2}.")
     else:
         print(f"Skipping comparison: One of the files is missing -> {file1} or {file2}")
