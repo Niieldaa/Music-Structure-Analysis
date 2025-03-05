@@ -1,5 +1,5 @@
-import csv
 import os
+import csv
 
 # Get the script's directory (relative to project root)
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -7,6 +7,9 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # Define folder paths
 folder1 = os.path.join(script_dir, "Files", "Export Folder", "L2")  # CSV1 folder
 folder2 = os.path.join(script_dir, "Files", "Parsed data", "Left")  # CSV2 folder
+
+# Output file
+output_csv = os.path.join(script_dir, "comparison_results.csv")
 
 # Function to compare timestamps and durations
 def compare(file1, file2, min_tolerance=0.01, max_tolerance=3.0):
@@ -31,28 +34,39 @@ def compare(file1, file2, min_tolerance=0.01, max_tolerance=3.0):
 
                     # Only keep values where time_diff is between 0.5s and 3s
                     if min_tolerance <= time_diff <= max_tolerance:
-                        matches.append(
-                            (row1, row2, f"Time diff: {time_diff:.3f}s, Duration diff: {duration_diff:.3f}s")
-                        )
+                        matches.append([
+                            os.path.basename(file1), os.path.basename(file2),
+                            time1, duration1, time2, duration2,
+                            f"{time_diff:.3f}s", f"{duration_diff:.3f}s"
+                        ])
                 except ValueError:
                     print(f"Skipping row due to invalid number format: {row1} or {row2}")
 
     return matches
 
-# Loop through files 1 to 72
-for i in range(1, 73):
-    file1 = os.path.join(folder1, f"parsed_data_{i}.csv")
-    file2 = os.path.join(folder2, f"parsed_VitalicSegmented{i}L.csv")
+# Open output CSV file for writing
+with open(output_csv, mode="w", newline="") as csv_output:
+    writer = csv.writer(csv_output)
+    writer.writerow([
+        "File1", "File2", "Timestamp1", "Duration1",
+        "Timestamp2", "Duration2", "Time Difference", "Duration Difference"
+    ])
 
-    if os.path.exists(file1) and os.path.exists(file2):
-        print(f"\nComparing parsed_data_{i}.csv with parsed_VitalicSegmented{i}L.csv...")
-        matches = compare(file1, file2)
+    # Loop through files 1 to 72
+    for i in range(1, 73):
+        file1 = os.path.join(folder1, f"parsed_data_{i}.csv")
+        file2 = os.path.join(folder2, f"parsed_VitalicSegmented{i}L.csv")
 
-        if matches:
-            print(f"\nMatching segments found in {file1} and {file2}:")
-            for row1, row2, match in matches:
-                print(f" - {match}: {row1} vs {row2}")
+        if os.path.exists(file1) and os.path.exists(file2):
+            print(f"\nComparing parsed_data_{i}.csv with parsed_VitalicSegmented{i}L.csv...")
+            matches = compare(file1, file2)
+
+            if matches:
+                writer.writerows(matches)
+                print(f"Matching segments found in {file1} and {file2}, saved to CSV.")
+            else:
+                print(f"No matching segments within 0.5s - 3s found in {file1} and {file2}.")
         else:
-            print(f"No matching segments within 0.5s - 3s found in {file1} and {file2}.")
-    else:
-        print(f"Skipping comparison: One of the files is missing -> {file1} or {file2}")
+            print(f"Skipping comparison: One of the files is missing -> {file1} or {file2}")
+
+print(f"\nComparison results saved to {output_csv}")
