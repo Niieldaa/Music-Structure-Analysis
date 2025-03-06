@@ -1,7 +1,12 @@
 import csv
 import os
+
+import matplotlib
 from sklearn.metrics import confusion_matrix, classification_report
 import numpy as np
+import matplotlib.pyplot as plt
+matplotlib.use('TkAgg')  # This is needed for the Confusion Matrix to be visualized as a figure
+import seaborn as sns
 
 # Get the script's directory (relative to project root)
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,7 +20,7 @@ output_csv = os.path.join(script_dir, "differences_log L2 and Left.csv")
 
 
 # Function to compare timestamps and durations and compute F1 score
-def compare(file1, file2, min_tolerance=0.5, max_tolerance=3.0):
+def compare(file1, file2, min_tolerance=0.0, max_tolerance=1.0):
     TP, FP, FN = 0, 0, 0  # Initialize counters
     differences = []
     matched_indices = set()  # Track matched rows in file2
@@ -113,14 +118,41 @@ overall_precision = total_TP / (total_TP + total_FP) if (total_TP + total_FP) > 
 overall_recall = total_TP / (total_TP + total_FN) if (total_TP + total_FN) > 0 else 0
 overall_f1_score = 2 * (overall_precision * overall_recall) / (overall_precision + overall_recall) if (overall_precision + overall_recall) > 0 else 0
 
+# Estimate Total Comparisons
+total_comparisons = total_TP + total_FP + total_FN  # Total elements considered
+
+# Compute True Negatives (TN)
+total_TN = max(0, total_comparisons - (total_TP + total_FP + total_FN))
+
+# All print statements for precision, recall, f1-score and TN
 print("\nOverall F1 Score Results:")
 print(f"Precision: {overall_precision:.4f}")
 print(f"Recall: {overall_recall:.4f}")
 print(f"F1 Score: {overall_f1_score:.4f}")
+print(f"True Negatives (TN): {total_TN}")  # Print TN
+
+# Create Confusion Matrix in text/console format
+conf_matrix = np.array([[total_TP, total_FN], [total_FP, total_TN]])
+
+# Print Confusion Matrix in Console
+print("\nConfusion Matrix:")
+print(f"                 Predicted Positive   Predicted Negative")
+print(f"Actual Positive    {total_TP:<18}     {total_FN:<18}")
+print(f"Actual Negative    {total_FP:<18}     {total_TN:<18}")
+
+# Plot Confusion Matrix as a figure
+plt.figure(figsize=(5, 4))
+sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues",
+            xticklabels=["Predicted Positive", "Predicted Negative"],
+            yticklabels=["Actual Positive", "Actual Negative"])
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.title("Confusion Matrix")
+plt.show()
 
 # Append overall F1 score to CSV
 with open(output_csv, mode="a", newline="", encoding="utf-8") as csv_output:
     writer = csv.writer(csv_output)
-    writer.writerow(["Overall", "", total_TP, total_FP, total_FN, f"{overall_precision:.4f}", f"{overall_recall:.4f}", f"{overall_f1_score:.4f}"])
+    writer.writerow(["Overall", "", total_TP, total_FP, total_FN, total_TN, f"{overall_precision:.4f}", f"{overall_recall:.4f}", f"{overall_f1_score:.4f}"])
 
 print(f"\nComparison results saved to {output_csv}")
