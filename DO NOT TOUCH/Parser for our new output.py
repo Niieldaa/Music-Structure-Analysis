@@ -68,8 +68,8 @@ def process_files_in_folder(folder_path, output_folder):
 
 
 # located files
-file_folder = 'Vitallic/Right'
-output_folder = 'Files/Segmentino Parsed Data/Right'
+file_folder = 'Vitallic/Segmentino/SEGMENTINOVitalicLeftOnly'
+output_folder = 'Files/Segmentino Parsed Data/Left'
 
 process_files_in_folder(file_folder, output_folder)
 
