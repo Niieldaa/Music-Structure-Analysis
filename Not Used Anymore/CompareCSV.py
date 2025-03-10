@@ -6,7 +6,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Define folder paths
 folder1 = os.path.join(script_dir, "Files", "Export Folder", "L2")  # CSV1 folder
-folder2 = os.path.join(script_dir, "Files", "Parsed data", "Left")  # CSV2 folder
+folder2 = os.path.join(script_dir, "Files", "QM Parsed data", "Left")  # CSV2 folder
 
 # Output file
 output_csv = os.path.join(script_dir, "comparison_results.csv")
