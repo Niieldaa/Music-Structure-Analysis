@@ -81,6 +81,6 @@ def process_folder(input_folder, output_folder):
 
 # Example usage:
 input_folder = "Files/Export Folder/R"  # Path to the folder containing the input CSV files
-output_folder = "Files/Export Folder/R2"  # Path to the folder where processed files will be saved
+output_folder = "Files/Export Folder/Right"  # Path to the folder where processed files will be saved
 
 process_folder(input_folder, output_folder)
