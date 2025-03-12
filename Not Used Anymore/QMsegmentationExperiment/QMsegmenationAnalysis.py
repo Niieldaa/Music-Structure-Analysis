@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Set your folder path here
-folder_path = os.path.join(script_dir, "Not Used Anymore","QMtestNico")  # CSV1 folder
+folder_path = os.path.join(script_dir, "QMtestNico")  # CSV folder
 
 # Check if the folder exists
 if not os.path.exists(folder_path):
@@ -14,6 +14,7 @@ else:
     # Initialize an empty list to store the differences for each file
     time_differences = []
     file_names = []
+    all_time_diffs = []  # List to store all time differences for CSV export
 
     # Loop through each CSV file in the folder
     for file_name in os.listdir(folder_path):
@@ -33,6 +34,18 @@ else:
                 # Append the differences and file names
                 time_differences.append(df['TIME_DIFF'].dropna())  # Remove NaN for the first value
                 file_names.append(file_name)
+
+                # Add the differences to the all_time_diffs list for CSV export
+                all_time_diffs.append(df[['TIME', 'TIME_DIFF']].dropna())  # Keep 'TIME' and 'TIME_DIFF' for export
+
+    # Concatenate all the time differences from different files into one DataFrame
+    combined_df = pd.concat(all_time_diffs, ignore_index=True)
+
+    # Export the combined time differences to a new CSV file
+    output_csv_path = os.path.join(script_dir, 'time_differences.csv')
+    combined_df.to_csv(output_csv_path, index=False)
+
+    print(f"Time differences exported to {output_csv_path}")
 
     # Create a plot to visualize the differences
     plt.figure(figsize=(10, 6))
