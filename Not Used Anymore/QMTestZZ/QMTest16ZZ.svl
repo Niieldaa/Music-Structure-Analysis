@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sonic-visualiser>
+<sv>
+  <data>
+    <model id="46" name="Polkamatic: Segmenter" sampleRate="44100" start="0" end="4974480" type="sparse" dimensions="3" resolution="8820" notifyOnAdd="true" dataset="45" subtype="region" valueQuantization="0" minimum="1" maximum="8" units="segment-type" />
+    <dataset id="45" dimensions="3">
+      <point frame="0" value="1" duration="582120" label="A" />
+      <point frame="582120" value="2" duration="811440" label="B" />
+      <point frame="1393560" value="3" duration="194040" label="C" />
+      <point frame="1587600" value="2" duration="282240" label="B" />
+      <point frame="1869840" value="3" duration="114660" label="C" />
+      <point frame="1984500" value="4" duration="837900" label="D" />
+      <point frame="2822400" value="5" duration="132300" label="E" />
+      <point frame="2954700" value="6" duration="123480" label="F" />
+      <point frame="3078180" value="7" duration="123480" label="G" />
+      <point frame="3201660" value="8" duration="97020" label="H" />
+      <point frame="3298680" value="5" duration="141120" label="E" />
+      <point frame="3439800" value="6" duration="123480" label="F" />
+      <point frame="3563280" value="7" duration="114660" label="G" />
+      <point frame="3677940" value="8" duration="105840" label="H" />
+      <point frame="3783780" value="5" duration="141120" label="E" />
+      <point frame="3924900" value="6" duration="123480" label="F" />
+      <point frame="4048380" value="7" duration="114660" label="G" />
+      <point frame="4163040" value="8" duration="97020" label="H" />
+      <point frame="4260060" value="5" duration="141120" label="E" />
+      <point frame="4401180" value="6" duration="123480" label="F" />
+      <point frame="4524660" value="7" duration="123480" label="G" />
+      <point frame="4648140" value="8" duration="176400" label="H" />
+      <point frame="4824540" value="2" duration="149940" label="B" />
+    </dataset>
+  </data>
+  <display>
+    <layer id="47" type="regions" name="Segmenter &lt;16&gt;" model="46"  verticalScale="1" plotStyle="1" fillColourMap="Green" colourMap="0"  colourName="Bright Green" colour="#14ff5a" darkBackground="true" />
+  </display>
+</sv>

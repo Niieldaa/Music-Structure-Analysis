@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sonic-visualiser>
+<sv>
+  <data>
+    <model id="55" name="Polkamatic: Segmenter" sampleRate="44100" start="0" end="4974480" type="sparse" dimensions="3" resolution="8820" notifyOnAdd="true" dataset="54" subtype="region" valueQuantization="0" minimum="1" maximum="8" units="segment-type" />
+    <dataset id="54" dimensions="3">
+      <point frame="0" value="1" duration="1243620" label="A" />
+      <point frame="1243620" value="2" duration="211680" label="B" />
+      <point frame="1455300" value="1" duration="273420" label="A" />
+      <point frame="1728720" value="2" duration="1067220" label="B" />
+      <point frame="2795940" value="3" duration="114660" label="C" />
+      <point frame="2910600" value="4" duration="79380" label="D" />
+      <point frame="2989980" value="5" duration="88200" label="E" />
+      <point frame="3078180" value="6" duration="123480" label="F" />
+      <point frame="3201660" value="7" duration="79380" label="G" />
+      <point frame="3281040" value="3" duration="114660" label="C" />
+      <point frame="3395700" value="4" duration="79380" label="D" />
+      <point frame="3475080" value="5" duration="88200" label="E" />
+      <point frame="3563280" value="6" duration="123480" label="F" />
+      <point frame="3686760" value="7" duration="79380" label="G" />
+      <point frame="3766140" value="3" duration="114660" label="C" />
+      <point frame="3880800" value="4" duration="70560" label="D" />
+      <point frame="3951360" value="5" duration="88200" label="E" />
+      <point frame="4039560" value="6" duration="123480" label="F" />
+      <point frame="4163040" value="7" duration="88200" label="G" />
+      <point frame="4251240" value="3" duration="114660" label="C" />
+      <point frame="4365900" value="8" duration="79380" label="H" />
+      <point frame="4445280" value="5" duration="79380" label="E" />
+      <point frame="4524660" value="6" duration="123480" label="F" />
+      <point frame="4648140" value="7" duration="88200" label="G" />
+      <point frame="4736340" value="3" duration="105840" label="C" />
+      <point frame="4842180" value="1" duration="132300" label="A" />
+    </dataset>
+  </data>
+  <display>
+    <layer id="56" type="regions" name="Segmenter &lt;19&gt;" model="55"  verticalScale="1" plotStyle="1" fillColourMap="Green" colourMap="0"  colourName="White" colour="#ffffff" darkBackground="true" />
+  </display>
+</sv>

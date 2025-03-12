@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sonic-visualiser>
+<sv>
+  <data>
+    <model id="16" name="Polkamatic: Segmenter" sampleRate="44100" start="0" end="4974480" type="sparse" dimensions="3" resolution="8820" notifyOnAdd="true" dataset="15" subtype="region" valueQuantization="0" minimum="1" maximum="8" units="segment-type" />
+    <dataset id="15" dimensions="3">
+      <point frame="0" value="1" duration="811440" label="A" />
+      <point frame="811440" value="2" duration="538020" label="B" />
+      <point frame="1349460" value="3" duration="167580" label="C" />
+      <point frame="1517040" value="2" duration="317520" label="B" />
+      <point frame="1834560" value="3" duration="88200" label="C" />
+      <point frame="1922760" value="4" duration="899640" label="D" />
+      <point frame="2822400" value="5" duration="158760" label="E" />
+      <point frame="2981160" value="6" duration="229320" label="F" />
+      <point frame="3210480" value="5" duration="255780" label="E" />
+      <point frame="3466260" value="6" duration="229320" label="F" />
+      <point frame="3695580" value="5" duration="246960" label="E" />
+      <point frame="3942540" value="6" duration="229320" label="F" />
+      <point frame="4171860" value="5" duration="255780" label="E" />
+      <point frame="4427640" value="6" duration="229320" label="F" />
+      <point frame="4656960" value="5" duration="167580" label="E" />
+      <point frame="4824540" value="7" duration="149940" label="G" />
+    </dataset>
+  </data>
+  <display>
+    <layer id="17" type="regions" name="Segmenter &lt;6&gt;" model="16"  verticalScale="1" plotStyle="1" fillColourMap="Green" colourMap="0"  colourName="Bright Purple" colour="#e14aff" darkBackground="true" />
+  </display>
+</sv>
