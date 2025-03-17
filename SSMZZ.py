@@ -3,16 +3,28 @@ import librosa.display
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.spatial.distance import cdist
+'''
+Audio duration (longer audio = more frames)
+Hop length (smaller hop = more frames)
+Sampling rate (higher rate = more frames)
+'''
 
 # Load an audio file
 file_path = "DO NOT TOUCH/Audio Files/Emmanuel/01. Vitalic.flac"  # Example file path
 y, sr = librosa.load(file_path, sr=None)  # sr=None keeps the original sampling rate
 
 # Compute feature matrix (e.g., MFCCs)
-mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=20)
+hop_length = 4096   # Increase hop length (default is usually 512)
+mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=20, hop_length=hop_length)
+
 
 # Compute the self-similarity matrix (SSM) using cosine similarity
-similarity_matrix = 1 - cdist(mfcc.T, mfcc.T, metric='cosine')
+mfcc_downsampled = mfcc[:, ::5]  # Keep every 5th frame
+similarity_matrix = 1 - cdist(mfcc_downsampled.T, mfcc_downsampled.T, metric='cosine')
+
+max_frames = 200  # Define the maximum number of frames
+mfcc = mfcc[:, :max_frames]  # Trim to first 500 frames
+
 
 # Plot the self-similarity matrix
 plt.figure(figsize=(8, 6))
