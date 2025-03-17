@@ -3,6 +3,11 @@ import librosa.display
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.spatial.distance import cdist
+'''
+Audio duration (longer audio = more frames)
+Hop length (smaller hop = more frames)
+Sampling rate (higher rate = more frames)
+'''
 
 # Load an audio file
 file_path = "DO NOT TOUCH/Audio Files/Emmanuel/01. Vitalic - Polkamatic.flac"  # Example file path
