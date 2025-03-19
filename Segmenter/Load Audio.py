@@ -18,7 +18,7 @@ if not flac_files:
 def compute_chromagram(y, sr):
     start_time = time.time()
 
-    # Compute chromagram using CQT
+    # Compute chromagram using CQT, or SIFT
     chroma = librosa.feature.chroma_cqt(y=y, sr=sr, hop_length=512)
 
     print(f'Chromagram computed in {(time.time() - start_time):.2f} seconds.')
