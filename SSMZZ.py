@@ -14,12 +14,12 @@ file_path = "DO NOT TOUCH/Audio Files/Emmanuel/01. Vitalic.flac"  # Example file
 y, sr = librosa.load(file_path, sr=None)  # sr=None keeps the original sampling rate
 
 # Compute feature matrix (e.g., MFCCs)
-hop_length = 4096   # Increase hop length (default is usually 512)
+hop_length = 512   # Increase hop length (default is usually 512)
 mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=20, hop_length=hop_length)
 
 
 # Compute the self-similarity matrix (SSM) using cosine similarity
-mfcc_downsampled = mfcc[:, ::5]  # Keep every 5th frame
+mfcc_downsampled = mfcc[:, ::1]  # Keep every 5th frame
 similarity_matrix = 1 - cdist(mfcc_downsampled.T, mfcc_downsampled.T, metric='cosine')
 
 max_frames = 200  # Define the maximum number of frames
