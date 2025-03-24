@@ -5,7 +5,7 @@ import csv
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Define folder paths
-folder1 = os.path.join(script_dir, "Files", "Export Folder", "Left")  # CSV1 folder
+folder1 = os.path.join(script_dir, "DO NOT TOUCH", "GroundTruthData", "GroundTruthLeft")  # CSV1 folder
 folder2 = os.path.join(script_dir, "Files", "QM Parsed data", "Left")  # CSV2 folder
 
 # Output file
@@ -55,10 +55,10 @@ with open(output_csv, mode="w", newline="") as csv_output:
     # Loop through files 1 to 72
     for i in range(1, 73):
         file1 = os.path.join(folder1, f"parsed_data_{i}.csv")
-        file2 = os.path.join(folder2, f"parsed_VitalicSegmented{i}L.csv")
+        file2 = os.path.join(folder2, f"parsed_VitalicQM{i}L.csv")
 
         if os.path.exists(file1) and os.path.exists(file2):
-            print(f"\nComparing parsed_data_{i}.csv with parsed_VitalicSegmented{i}L.csv...")
+            print(f"\nComparing parsed_data_{i}.csv with parsed_VitalicQM{i}L.csv...")
             matches = compare(file1, file2)
 
             if matches:

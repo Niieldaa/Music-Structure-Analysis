@@ -13,7 +13,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Define folder paths
 folder1 = os.path.join(script_dir, "DO NOT TOUCH", "GroundTruthData", "GroundTruthLeft")  # CSV1 folder
-folder2 = os.path.join(script_dir, "Files", "Segmentino Parsed data", "Left")  # CSV2 folder
+folder2 = os.path.join(script_dir, "Files","Segmentino Parsed Data", "Left")  # CSV2 folder
 
 # Output CSV file to save differences
 output_csv = os.path.join(script_dir, "differences_log Left and Left.csv")
