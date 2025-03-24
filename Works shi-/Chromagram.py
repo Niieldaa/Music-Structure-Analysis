@@ -5,7 +5,7 @@ import librosa.display
 import matplotlib.pyplot as plt
 
 # Load CSV file
-csv_file = r"C:\Users\nield\Desktop\GitHub\Music-Structure-Analysis\Files\QM Parsed data\Left\parsed_VitalicQM2L.csv"  # Update with actual path
+csv_file = r"/Music-Structure-Analysis/Files/QM Parsed data/Left/parsed_VitalicQM2L.csv"  # Update with actual path
 df = pd.read_csv(csv_file)
 
 # Extract time, pitch values, and durations
