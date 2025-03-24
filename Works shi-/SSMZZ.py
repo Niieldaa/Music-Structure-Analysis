@@ -10,7 +10,7 @@ Sampling rate (higher rate = more frames)
 '''
 
 # Load an audio file
-file_path = "DO NOT TOUCH/Audio Files/Emmanuel/01. Vitalic - Polkamatic.flac"  # Example file path
+file_path = "../DO NOT TOUCH/Audio Files/Emmanuel/01. Vitalic - Polkamatic.flac"  # Example file path
 y, sr = librosa.load(file_path, sr=None)  # sr=None keeps the original sampling rate
 
 # Compute feature matrix (e.g., MFCCs)

@@ -5,7 +5,7 @@ import os
 import pandas as pd
 
 # Here is the folder path, for which folder of data you want to use.
-folder_path = "../Files/QM Parsed data/Left"
+folder_path = "../../Files/QM Parsed data/Left"
 
 # Here it checks if the files in the folder are actually csv files.
 csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
