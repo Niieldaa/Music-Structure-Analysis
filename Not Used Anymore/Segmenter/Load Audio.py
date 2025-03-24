@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Import the files
-folder_path = "../DO NOT TOUCH/Audio Files/Emmanuel"
+folder_path = "../../DO NOT TOUCH/Audio Files/Emmanuel"
 if not os.path.exists(folder_path):
     raise FileNotFoundError(f"Error: Directory '{folder_path}' does not exist.")
 flac_files = sorted([f for f in os.listdir(folder_path) if f.endswith('.flac') or f.endswith('.FLAC')])
