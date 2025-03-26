@@ -7,9 +7,9 @@ def parse_new_data(data):
 
     for row in reader:
         parsed_data.append({
-            "TIME": float(row['TIME']),
+            "TIME": round(float(row['TIME']), 1),
             "VALUE": int(row['VALUE']),
-            "DURATION": float(row['DURATION']),
+            "DURATION": round(float(row['DURATION']), 1),
             "LABEL": str(row["LABEL"])
         })
     return parsed_data
@@ -44,7 +44,7 @@ def process_files_in_folder(folder_path, output_folder):
         print(f"Processed and saved: {output_file_path}")
 
 # Use absolute paths for safety
-file_folder = 'Vitallic/Segmentino/SEGMENTINOVitalicRightOnly'
-output_folder = 'Files/Segmentino Parsed Data/Right'
+file_folder = r'C:\Users\anbom\Documents\GitHub\Music-Structure-Analysis\Ruptures_segmented_audio_csv'
+output_folder = r'C:\Users\anbom\Documents\GitHub\Music-Structure-Analysis\Ruptures_parsed_data'
 
 process_files_in_folder(file_folder, output_folder)
