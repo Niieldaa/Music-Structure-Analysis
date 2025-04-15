@@ -1,0 +1,7 @@
+TIME,VALUE,DURATION,LABEL
+0.0,1,1.5,Segment 1
+1.5,2,31.5,Segment 2
+33.0,3,64.9,Segment 3
+98.0,4,101.4,Segment 4
+199.3,5,8.9,Segment 5
+208.2,6,3.6,Segment 6

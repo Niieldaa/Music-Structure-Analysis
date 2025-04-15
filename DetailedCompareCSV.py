@@ -12,11 +12,11 @@ import seaborn as sns
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Define folder paths
-folder1 = os.path.join(script_dir, "DO NOT TOUCH", "GroundTruthData", "GroundTruthLeft")  # CSV1 folder
-folder2 = os.path.join(script_dir, "Files", "Segmentino Parsed data", "Left")  # CSV2 folder
+folder1 = os.path.join(script_dir, "DO NOT TOUCH", "GroundTruthData", "GroundTruthRight")  # CSV1 folder
+folder2 = os.path.join(script_dir, "Files", "Ruptures_parsed_data", "Ruptures_both_channels")  # CSV2 folder
 
 # Output CSV file to save differences
-output_csv = os.path.join(script_dir, "differences_log Left and Left.csv")
+output_csv = os.path.join(script_dir, "differences_log GroundTruthRight and RupturesBoth.csv")
 
 
 # Function to compare timestamps and durations and compute F1 score
@@ -87,10 +87,10 @@ with open(output_csv, mode="w", newline="", encoding="utf-8") as csv_output:
     # Loop through files 1 to 72
     for i in range(1, 73):
         file1 = os.path.join(folder1, f"parsed_data_{i}.csv")
-        file2 = os.path.join(folder2, f"parsed_VitalicSEGMENTINO{i}L.csv")
+        file2 = os.path.join(folder2, f"parsed_all_segments_song_{i}.csv")
 
         if os.path.exists(file1) and os.path.exists(file2):
-            print(f"\nComparing parsed_data_{i}.csv with parsed_VitalicSEGMENTINO{i}L.csv...")
+            print(f"\nComparing parsed_data_{i}.csv with parsed_all_segments_song_{i}.csv...")
             TP, FP, FN = compare(file1, file2)
 
             # Compute precision, recall, and F1 score
