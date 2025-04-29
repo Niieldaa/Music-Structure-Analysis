@@ -52,10 +52,10 @@ else:
 
     # Plot the time differences for each file
     for idx, time_diff in enumerate(time_differences):
-        plt.plot(time_diff, label=f'File: {file_names[idx]}')
+        plt.plot(time_diff, label=f'File: {[idx]}')
 
     # Adding labels and title
-    plt.xlabel('Index')
+    plt.xlabel('Segment boundary index')
     plt.ylabel('Time Difference (seconds)')
     plt.title('Time Differences between Consecutive Rows in CSV Files')
     plt.legend()
