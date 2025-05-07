@@ -17,8 +17,8 @@ def gaussian_score_flat_top(time_diff, sigma=0.9, flat_top=0.25):
         return 100.0 * math.exp(- (adjusted_diff ** 2) / (2 * sigma ** 2))
 
 # File paths
-GT = r"C:\Users\nicol\Documents\GitHub\Music-Structure-Analysis\DO NOT TOUCH\GroundTruthData\GroundTruthRight\parsed_data_66.csv"
-PRED = r"C:\Users\nicol\Documents\GitHub\Music-Structure-Analysis\DO NOT TOUCH\DataProcessing\OurOwnAnnotations\OurCSVData\Light_Is_A_Train_OurSegmenterTempo.csv"  # Replace with actual prediction file path
+GT = r"C:\Users\nicol\Documents\GitHub\Music-Structure-Analysis\DO NOT TOUCH\GroundTruthData\GroundTruthRight\parsed_data_27.csv"
+PRED = r"C:\Users\nicol\Documents\GitHub\Music-Structure-Analysis\DO NOT TOUCH\DataProcessing\OurOwnAnnotations\OurCSVData\Allan_Dellon_OurSegmenterChroma.csv"  # Replace with actual prediction file path
 
 
 # Load timestamps
@@ -69,4 +69,4 @@ pd.DataFrame([{
     "Recall": recall,
     "Accuracy": accuracy,
     "F1 Score": f1_score
-}]).to_csv("OurAnnotationsFMeasure/EmmanuelAnnotationsFMeasure/SingularFMeasure_Emmanuel_Light_Is_A_TrainTempo.csv", index=False)
+}]).to_csv("OurAnnotationsFMeasure/EmmanuelAnnotationsFMeasure/SingularFMeasure_Emmanuel_Allan_Dellon_Chroma.csv", index=False)
