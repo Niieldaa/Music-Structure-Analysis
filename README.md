@@ -6,4 +6,8 @@ This project focuses on the structural analysis of EDM (Electronic Dance Music) 
 
 📂 **Final Algorithm:**  
 You can find the final implementation in the following Jupyter notebook:  
-[`EDM-Segmenter/EDM-Segmenter.ipynb`](./EDM-Segmenter/EDM-Segmenter.ipynb)
+[`EDM-Segmenter/EDM-Segmenter.ipynb`](./EDM-Segmenter/EDM-Segmenter.ipynb) 
+
+**For visualization and expanded SSM's**
+Go to this Jupyter notebook
+[`EDM-Segmenter/EDM-Segmenter SSM.ipynb`](./EDM-Segmenter/EDM-SegmenterSSM.ipynb)
