@@ -1,3 +1,9 @@
-# Music-Structure-Analysis
-This MED 4 project focuses on segmenting EDM tracks by analyzing their structural components (verse, chorus, drop, etc.). T
-he goal is to develop an algorithm that identifies patterns and transitions, aiding in applications like music recommendation, remixing, and playlist creation. - i guess?
+# 🎶 Music Structure Analysis
+
+**MED 4 Project – EDM Track Segmentation**
+
+This project focuses on the structural analysis of EDM (Electronic Dance Music) tracks by segmenting them based on musical features such as **Chroma** and **Tempo**. The goal is to develop an algorithm capable of identifying patterns and transitions in the music, dividing them into segments.
+
+📂 **Final Algorithm:**  
+You can find the final implementation in the following Jupyter notebook:  
+[`EDM-Segmenter/EDM-Segmenter.ipynb`](./EDM-Segmenter/EDM-Segmenter.ipynb)
